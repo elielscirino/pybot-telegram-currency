@@ -10,7 +10,11 @@ def main():
     dp.add_handler(CommandHandler('start', start))
     dp.add_handler(CommandHandler('help', help))
     dp.add_handler(CommandHandler('realdolar', realdolar))
+    dp.add_handler(CommandHandler('realeuro', realeuro))
     dp.add_handler(CommandHandler('dolarreal', dolarreal))
+    dp.add_handler(CommandHandler('dolareuro', dolareuro))
+    dp.add_handler(CommandHandler('euroreal', euroreal))
+    dp.add_handler(CommandHandler('eurodolar', eurodolar))
 
     dp.add_error_handler(error)
 
