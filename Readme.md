@@ -6,4 +6,4 @@ You can make requests of some cash using pull requests if you want to.
 ### How to use:
 
 To try the code, you can just ```git clone https://github.com/elielscirino/pybot-telegram-currency``` and change the ```API-TOKEN``` value to **your token**
-that can be get in [@BotFather](t.me/BotFather), creating a new bot.
+that can be get in [BotFather](https://t.me/botfather), creating a new bot.
