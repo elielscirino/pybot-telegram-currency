@@ -20,13 +20,13 @@ def help(update, context):
     update.message.reply_text(
         '/start - Start bot\n'+
         '/help - Show currency list\n'+
-        'REAL (BRL)\n' +
+        '\n'+
         '/realdolar - Real (BRL) to Dolar (USD)\n' +
         '/realeuro - Real (BRL) to Euro (EUR)\n' +
-        'DOLAR (USD)\n' +
+        '\n'+
         '/dolarreal - Dolar (USD) to Real (BRL)\n' +
         '/dolareuro - Dolar (USD) to Euro (EUR)\n' +
-        'EURO (EUR)\n' +
+        '\n'+
         '/euroreal - Euro (EUR) to Real (BRL)\n' +
         '/eurodolar - Euro (EUR) to Dolar (USD)\n'
     )
