@@ -1,12 +1,5 @@
-from requests.api import get
 from telegram.ext import contexttypes
-import requests
-
-site = requests.get('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,USD-EUR').json()
-dolar_real = float(site['USDBRL']['high'])
-euro_real = float(site['EURBRL']['high'])
-dolar_euro = float(site['USDEUR']['high'])
-
+from currency import *
 
 def error(update, context):
     print(f'Algo deu errado {context.error}')
@@ -21,18 +14,28 @@ def help(update, context):
         '/start - Start bot\n'+
         '/help - Show currency list\n'+
         '\n'+
-        '/realdolar - Real (BRL) to Dolar (USD)\n' +
+        '/realdollar - Real (BRL) to Dollar (USD)\n' +
         '/realeuro - Real (BRL) to Euro (EUR)\n' +
+        '/realpound - Real (BRL) to Pound (GBP)\n' +
         '\n'+
-        '/dolarreal - Dolar (USD) to Real (BRL)\n' +
-        '/dolareuro - Dolar (USD) to Euro (EUR)\n' +
+        '/dollarreal - Dollar (USD) to Real (BRL)\n' +
+        '/dollareuro - Dollar (USD) to Euro (EUR)\n' +
+        '/dollarpound - Dollar (USD) to Pound (GBP)\n' +
         '\n'+
         '/euroreal - Euro (EUR) to Real (BRL)\n' +
-        '/eurodolar - Euro (EUR) to Dolar (USD)\n'
+        '/eurodollar - Euro (EUR) to Dollar (USD)\n' +
+        '/europound - Euro (EUR) to Pound (GBP)\n' +
+        '\n'+
+        '/poundreal - Pound (GBP) to Real (GBP)\n' +
+        '/pounddollar - Pound (GBP) to Dollar (USD)\n' +
+        '/poundeuro - Pound (GBP) to Euro (EUR)'
+
     )
 
-def realdolar(update, context):
-    real = update.message.text.replace('/realdolar','')
+#BRL
+
+def realdollar(update, context):
+    real = update.message.text.replace('/realdollar','')
     real = real.replace(',','.')
 
     real = float(real)
@@ -40,14 +43,6 @@ def realdolar(update, context):
 
     update.message.reply_text(f'USD {convert:.2f}')
 
-def dolarreal(update, context):
-    real = update.message.text.replace('/dolarreal','')
-    real = real.replace(',','.')
-
-    real = float(real)
-    convert = dolar_real*real
-
-    update.message.reply_text(f'BRL {convert:.2f}')
 
 def realeuro(update, context):
     real = update.message.text.replace('/realeuro','')
@@ -58,17 +53,23 @@ def realeuro(update, context):
 
     update.message.reply_text(f'EUR {convert:.2f}')
 
-def euroreal(update, context):
-    real = update.message.text.replace('/euroreal','')
+
+
+def realpound(update, context):
+    real = update.message.text.replace('/realpound','')
     real = real.replace(',','.')
 
     real = float(real)
-    convert = real*euro_real
+    convert = real/libra_real
 
-    update.message.reply_text(f'BRL {convert:.2f}')
+    update.message.reply_text(f'GBP {convert:.2f}')
 
-def dolareuro(update, context):
-    dolar = update.message.text.replace('/dolareuro','')
+
+#USD
+
+
+def dollareuro(update, context):
+    dolar = update.message.text.replace('/dollareuro','')
     dolar = dolar.replace(',','.')
 
     dolar = float(dolar)
@@ -76,11 +77,85 @@ def dolareuro(update, context):
 
     update.message.reply_text(f'EUR {convert:.2f}')
 
-def eurodolar(update, context):
-    dolar = update.message.text.replace('/eurodolar','')
+def dollarpound(update, context):
+    dolar = update.message.text.replace('/dollarpound','')
     dolar = dolar.replace(',','.')
 
     dolar = float(dolar)
-    convert = dolar/dolar_euro
+    convert = dolar/libra_dolar
+
+    update.message.reply_text(f'GBP {convert:.2f}')
+
+
+def dollarreal(update, context):
+    dolar = update.message.text.replace('/dollarreal','')
+    dolar = dolar.replace(',','.')
+
+    dolar = float(dolar)
+    convert = dolar*dolar_real
+
+    update.message.reply_text(f'BRL {convert:.2f}')
+
+
+#EUR
+
+def euroreal(update, context):
+    euro = update.message.text.replace('/euroreal','')
+    euro = euro.replace(',','.')
+
+    euro = float(euro)
+    convert = euro*euro_real
+
+    update.message.reply_text(f'BRL {convert:.2f}')
+
+
+def eurodollar(update, context):
+    euro = update.message.text.replace('/eurodollar','')
+    euro = euro.replace(',','.')
+
+    euro = float(euro)
+    convert = euro/dolar_euro
 
     update.message.reply_text(f'USD {convert:.2f}')
+
+
+def europound(update, context):
+    euro = update.message.text.replace('/europound','')
+    euro = euro.replace(',','.')
+
+    euro = float(euro)
+    convert = euro/libra_euro
+
+    update.message.reply_text(f'GBP {convert:.2f}')
+
+
+#GBP
+
+def poundreal(update, context):
+    libra = update.message.text.replace('/poundreal','')
+    libra = libra.replace(',','.')
+
+    libra = float(libra)
+    convert = libra*libra_real
+
+    update.message.reply_text(f'BRL {convert:.2f}')
+
+
+def pounddollar(update, context):
+    libra = update.message.text.replace('/pounddollar','')
+    libra = libra.replace(',','.')
+
+    libra = float(libra)
+    convert = libra*libra_dolar
+
+    update.message.reply_text(f'USD {convert:.2f}')
+
+
+def poundeuro(update, context):
+    libra = update.message.text.replace('/poundeuro','')
+    libra = libra.replace(',','.')
+
+    libra = float(libra)
+    convert = libra*libra_euro
+
+    update.message.reply_text(f'EUR {convert:.2f}')
